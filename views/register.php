@@ -1,30 +1,10 @@
 <?php
-require_once("class_user.php");
-
-$user_login_id = "28";
-//$user_name = 'starwars';
-//$user_pass = '124';
-//$status_content = "This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. ";
-
-//$user_data = $user->get_user_data($user_name);
-//$user_friends = $user->get_user_friends($user_data->user_display_name);
-//$user_change_pass = $user->set_user_password($user_login_id, 'pas'); // works
-
-//$user_logged_in = $user->check_user_login($user_name, $user_pass);
-
-//$user_status = $user->set_status($user_login_id, $status_content); // works
-
- /*
-    print '<pre>';
-    var_dump($name);
-    print '</pre>';
-    */
+require_once("../models/class_user.php");
 
 // This logs out user
 session_start();
 $_SESSION["login"] = false;
 session_destroy();
-
 
 ?>
 
@@ -46,7 +26,7 @@ session_destroy();
   <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
-    
+
     <style>
         html, body {
             background-color: #F66763;
@@ -56,18 +36,18 @@ session_destroy();
             font-family: 'Lato', sans-serif;
             font-weight: bold;
         }
-        
-        
+
+
         input {
             font-size: 18px;
             font-family: 'Lato', sans-serif;
             font-weight: bold;
-            
+
             background-color: #fed1cd;
             color: #FB7B70;
         }
-        
-        
+
+
         input[type=text], input[type=password] {
             background-color: #fed1cd;
             color: #FB7B70;
@@ -75,7 +55,7 @@ session_destroy();
             padding: 8px 8px;
             margin:5px 0;
             outline: none;
-            
+
             text-align: center;
         }
         input[type=text]:focus, input[type=password]:focus {
@@ -84,14 +64,14 @@ session_destroy();
         input[type=text]::-webkit-input-placeholder, input[type=password]::-webkit-input-placeholder {
             color: #fca49c;
         }
-        
-        
+
+
         input[type=submit] {
             border: none;
-            
+
             padding: 8px 32px;
             margin: 4px 2px;
-            
+
             text-decoration: none;
             cursor: pointer;
         }
@@ -99,18 +79,18 @@ session_destroy();
             background-color: #fca49c;
             color:#fff;
         }
-        
-        
+
+
         .center {
             width: 100%;
             margin: 0 auto;
         }
-        
+
         form {
             display: inline-block;
             text-align: center;
         }
-        
+
     </style>
 </head>
 
@@ -123,18 +103,21 @@ session_destroy();
         <input type="submit" value="Login">
     </form>
     -->
-    
-    <form name="formLogin" class="center" role="form" method="post" action="checklogin.php">
-        <input type="text"      name="myusername" placeholder="Username"    autocomplete="off"><br>				
+    <h1 style="text-align:center;">Register</h1>
+    <form name="formRegister" class="center" role="form" method="post" action="../controllers/controller_register.php">
+        <input type="text"      name="myusername" placeholder="Username"    autocomplete="off"><br>
+        <input type="text"      name="myemail" placeholder="Email"    autocomplete="off"><br>
         <input type="password"  name="mypassword" placeholder="Password" autocomplete="off"><br>
-        <input type="submit"    name="Submit"     value="Login">
+        <input type="submit"    name="Submit"     value="Sign Up">
     </form>
-<?php 
+
+    <a href="../public/index.php">login</a>
+<?php
     if(isset($_GET['action'])){
 		switch($_GET['action']){
 			case 'error':
 				echo '<div class="alert alert-danger">
-					<strong>Error:</strong> Wrong username or password. Perhaps you have not activated your account.
+					<strong>Error:</strong> Failed to create user.
 					</div>';
 				break;
 			case 'errorEmail':
@@ -157,7 +140,7 @@ session_destroy();
 	}
 ?>
 
-    
+
     <script src="js/scripts.js"></script>
 </body>
 </html>

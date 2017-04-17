@@ -1,38 +1,27 @@
-<?php 
-/**
- * Database wrapper for a MySQL with PHP tutorial
- * 
- * @copyright Eran Galperin
- * @license MIT License
- * @see http://www.binpress.com/tutorial/using-php-with-mysql-the-right-way/17
- */
+<?php
+
 class Db {
 	// The database connection
 	protected static $connection;
-	
+
 	/**
 	 * Connect to the database
-	 * 
+	 *
 	 * @return bool false on failure / mysqli MySQLi object instance on success
 	 */
 	public function connect() {
-		
+
 		// Try and connect to the database
 		if(!isset(self::$connection)) {
 			// Load configuration as an array. Use the actual location of your configuration file
 			// Put the configuration file outside of the document root
 			// $connection is $pdo
-			$config = parse_ini_file('config.ini');
+			$config = parse_ini_file('../config.ini');
 			$dsn = "mysql:dbhost=" . $config['host'] . ";dbname=" . $config['dbname'] . ";";
-			
+
 			self::$connection = new PDO($dsn, $config['username'], $config['password']);
-			
-			//define("DBHOST", "localhost");
-			//define("DBNAME", "reviews");
-			//define("DBUSER", "root");
-			//define("DBPASS", "tygEbEf8");
 		}
-	
+
 		// If connection was not successful, handle the error
 		if(self::$connection === false) {
 			// Handle error - notify administrator, log to a file, show an error screen, etc.
@@ -40,7 +29,7 @@ class Db {
 		}
 		return self::$connection;
 	}
-	
+
 	/**
 	 * Query the database
 	 *
@@ -50,13 +39,13 @@ class Db {
 	public function query($query) {
 		// Connect to the database
 		$connection = $this -> connect();
-		
+
 		// Query the database
 		$result = $connection -> prepare($query);
 		$result->execute();
 		return $result;
 	}
-	
+
 	/**
 	 * Fetch rows from the database (SELECT query)
 	 *
@@ -68,7 +57,7 @@ class Db {
 		$rows = array();
 		$result = $connection -> prepare($query);
 		$result->execute();
-		
+
 		if($result === false) {
 			return false;
 		}
@@ -77,17 +66,17 @@ class Db {
 		}
 		return $rows;
 	}
-	
+
 	/**
 	 * Fetch the last error from the database
-	 * 
+	 *
 	 * @return string Database error message
 	 */
 	public function error() {
 		$connection = $this -> connect();
 		return $connection -> error;
 	}
-	
+
 	/**
 	 * Quote and escape value for use in a database query
 	 *
@@ -116,22 +105,22 @@ $db = new Db();
 class Dbold {
 	// The database connection
 	protected static $connection;
-	
+
 	/**
 	 * Connect to the database
-	 * 
+	 *
 	 * @return bool false on failure / mysqli MySQLi object instance on success
 	 */
 /*	public function connect() {
-		
+
 		// Try and connect to the database
 		if(!isset(self::$connection)) {
 			// Load configuration as an array. Use the actual location of your configuration file
 			// Put the configuration file outside of the document root
-			$config = parse_ini_file('../config.ini'); 
+			$config = parse_ini_file('../config.ini');
 			self::$connection = new mysqli('localhost',$config['username'],$config['password'],$config['dbname']);
 		}
-	
+
 		// If connection was not successful, handle the error
 		if(self::$connection === false) {
 			// Handle error - notify administrator, log to a file, show an error screen, etc.
@@ -139,7 +128,7 @@ class Dbold {
 		}
 		return self::$connection;
 	}
-	
+
 	/**
 	 * Query the database
 	 *
@@ -149,13 +138,13 @@ class Dbold {
 /*	public function query($query) {
 		// Connect to the database
 		$connection = $this -> connect();
-		
+
 		// Query the database
 		$result = $connection -> query($query);
-		
+
 		return $result;
 	}
-	
+
 	/**
 	 * Fetch rows from the database (SELECT query)
 	 *
@@ -173,17 +162,17 @@ class Dbold {
 		}
 		return $rows;
 	}
-	
+
 	/**
 	 * Fetch the last error from the database
-	 * 
+	 *
 	 * @return string Database error message
 	 */
 /*	public function error() {
 		$connection = $this -> connect();
 		return $connection -> error;
 	}
-	
+
 	/**
 	 * Quote and escape value for use in a database query
 	 *

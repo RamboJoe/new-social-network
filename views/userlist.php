@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("class_user.php");
+require_once("../models/class_user.php");
 
 $user_login_id = "28";
 //$user_name = 'starwars';
@@ -47,31 +47,31 @@ $user->isloggedin($_SESSION['username']);
   <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
-    
+
     <style>
         html, body {
             background-color: #6f5499;
-            
+
             color: #fff;
             font-size: 16px;
             font-family: 'Lato', sans-serif;
             font-weight: bold;
-            
+
             width: 100%;
             margin: 0 auto;
         }
-        
-        
+
+
         input {
             font-size: 18px;
             font-family: 'Lato', sans-serif;
             font-weight: bold;
-            
+
             background-color: #fed1cd;
             color: #FB7B70;
         }
-        
-        
+
+
         input[type=text], input[type=password] {
             background-color: #fed1cd;
             color: #FB7B70;
@@ -79,7 +79,7 @@ $user->isloggedin($_SESSION['username']);
             padding: 8px 8px;
             margin:5px 0;
             outline: none;
-            
+
             text-align: center;
         }
         input[type=text]:focus, input[type=password]:focus {
@@ -88,14 +88,14 @@ $user->isloggedin($_SESSION['username']);
         input[type=text]::-webkit-input-placeholder, input[type=password]::-webkit-input-placeholder {
             color: #fca49c;
         }
-        
-        
+
+
         input[type=submit] {
             border: none;
-            
+
             padding: 8px 32px;
             margin: 4px 2px;
-            
+
             text-decoration: none;
             cursor: pointer;
         }
@@ -103,28 +103,28 @@ $user->isloggedin($_SESSION['username']);
             background-color: #fca49c;
             color:#fff;
         }
-        
-        
+
+
         .center {
             width: 100%;
             margin: 0 auto;
         }
-        
+
         form {
             display: inline-block;
             text-align: center;
         }
-        
+
         nav {
             background-color: #fed1cd;
             color:red;
         }
-        
+
         a:link {color: #FB7B70; text-decoration: none}
         a:visited{color: #FB7B70; text-decoration: none}
         a:hover{color: #FB7B70;}
 
-        
+
     </style>
 </head>
 
@@ -136,13 +136,13 @@ $user->isloggedin($_SESSION['username']);
         <a href=""><span class="fa fa-cog"></span> settings</a>
         <a href="index.php?action=logout" class="btn" role="button"><span class="fa fa-sign-out"></span> Logout</a>
     </nav>
-    
+
     <section style="margin:auto; max-width:900px;">
         <a href="profile.php?uid="></a>
-        <p> All Users:<br><hr><?php 
-            // echo $user->get_all_user_data()[0]->user_display_name; 
-            $users = $user->get_all_user_data(); 
-            
+        <p> All Users:<br><hr><?php
+            // echo $user->get_all_user_data()[0]->user_display_name;
+            $users = $user->get_all_user_data();
+
             foreach($users as $user_profile){
                 echo "<a href='profile.php?uid=".$user_profile->user_display_name."'>".$user_profile->user_display_name."</a>";
                 echo '<br>';
@@ -150,13 +150,13 @@ $user->isloggedin($_SESSION['username']);
                 echo '<input type="button" style="float:right;" onclick="alert();" value="Request Friendship">';
                 echo '<br><br><hr>';
             }
-            
-            
+
+
             ?></p>
     </section>
 
-	
-    
+
+
     <script src="js/scripts.js"></script>
 </body>
 </html>
